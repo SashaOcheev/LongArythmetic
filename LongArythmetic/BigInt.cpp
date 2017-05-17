@@ -100,7 +100,7 @@ digit &BigInt::operator[](size_t i)
 	return m_number[i];
 }
 
-BigInt BigInt::operator+(const BigInt &number)
+const BigInt BigInt::operator+(const BigInt &number)
 {
     BigInt tempNumber(number);
 
@@ -119,7 +119,7 @@ BigInt BigInt::operator+(const BigInt &number)
 	return res;
 }
 
-BigInt BigInt::operator*(const BigInt &number)
+const BigInt BigInt::operator*(const BigInt &number)
 {
     BigInt tempNumber(number);
 
@@ -138,7 +138,7 @@ BigInt BigInt::operator*(const BigInt &number)
 	return res;
 }
 
-BigInt BigInt::operator-(const BigInt &number)
+const BigInt BigInt::operator-(const BigInt &number)
 {
     BigInt tempNumber(number);
 
