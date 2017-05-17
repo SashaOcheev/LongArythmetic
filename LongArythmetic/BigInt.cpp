@@ -57,6 +57,74 @@ void BigInt::removeInsignificant0()
 	}
 }
 
+const BigInt BigInt::operator+=(const BigInt & number)
+{
+    BigInt tempNumber(number);
+
+    size_t maxSize = std::max(tempNumber.GetSize(), GetSize());
+    addInsignificant0(maxSize);
+    tempNumber.addInsignificant0(maxSize);
+
+    BigInt res;
+    for (size_t i = 0; i < tempNumber.GetSize(); i++)
+        res.Push(m_number[i] + tempNumber[i]);
+
+    removeInsignificant0();
+    tempNumber.removeInsignificant0();
+
+    res.EditOverflowDigits();
+    
+    *this = res;
+    
+    return res;
+}
+
+const BigInt BigInt::operator*=(const BigInt & number)
+{
+    BigInt tempNumber(number);
+
+    BigInt res;
+    res.ResizeAndFill(tempNumber.GetSize() + GetSize(), 0);
+
+    for (size_t i = 0; i < GetSize(); i++)
+    {
+        for (size_t j = 0; j < tempNumber.GetSize(); j++)
+            res[i + j] += m_number[i] * tempNumber[j];
+        res.EditOverflowDigits();
+    }
+
+    res.removeInsignificant0();
+    *this = res;
+
+    return res;
+}
+
+const BigInt BigInt::operator-=(const BigInt & number)
+{
+    BigInt tempNumber(number);
+
+    if (*this <= number)
+        return BigInt(0);
+
+    BigInt res = *this;
+    for (size_t i = 0; i < tempNumber.GetSize(); i++)
+    {
+        if (res[i] < tempNumber[i])
+        {
+            res[i] += 10;
+            size_t j;
+            for (j = i + 1; res[j] == 0; j++)
+                res[j] = 9;
+            res[j] -= 1;
+        }
+        res[i] -= tempNumber[i];
+    }
+
+    res.removeInsignificant0();
+    *this = res;
+    return res;
+}
+
 size_t BigInt::GetSize() const
 {
 	return m_number.size();
@@ -102,65 +170,23 @@ digit &BigInt::operator[](size_t i)
 
 const BigInt BigInt::operator+(const BigInt &number)
 {
-    BigInt tempNumber(number);
-
-	size_t maxSize = std::max(tempNumber.GetSize(), GetSize());
-	addInsignificant0(maxSize);
-    tempNumber.addInsignificant0(maxSize);
-
-	BigInt res;
-	for (size_t i = 0; i < tempNumber.GetSize(); i++)
-		res.Push(m_number[i] + tempNumber[i]);
-
-	removeInsignificant0();
-    tempNumber.removeInsignificant0();
-
-	res.EditOverflowDigits();
-	return res;
+    BigInt temp;
+    temp = *this;
+    return temp += number;
 }
 
 const BigInt BigInt::operator*(const BigInt &number)
 {
-    BigInt tempNumber(number);
-
-	BigInt res;
-	res.ResizeAndFill(tempNumber.GetSize() + GetSize(), 0);
-
-	for (size_t i = 0; i < GetSize(); i++)
-	{
-		for (size_t j = 0; j < tempNumber.GetSize(); j++)
-			res[i + j] += m_number[i] * tempNumber[j];
-		res.EditOverflowDigits();
-	}
-
-	res.removeInsignificant0();
-
-	return res;
+    BigInt temp;
+    temp = *this;
+    return temp *= number;
 }
 
 const BigInt BigInt::operator-(const BigInt &number)
 {
-    BigInt tempNumber(number);
-
-	if (*this <= number)
-		return BigInt(0);
-
-	BigInt res = *this;
-	for (size_t i = 0; i < tempNumber.GetSize(); i++)
-	{
-		if (res[i] < tempNumber[i])
-		{
-			res[i] += 10;
-			size_t j;
-			for (j = i + 1; res[j] == 0; j++)
-				res[j] = 9;
-			res[j] -= 1;
-		}
-		res[i] -= tempNumber[i];
-	}
-
-	res.removeInsignificant0();
-	return res;
+    BigInt temp;
+    temp = *this;
+    return temp -= number;
 }
 
 bool BigInt::operator==(const BigInt &number) const

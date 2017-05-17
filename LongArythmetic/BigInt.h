@@ -14,6 +14,11 @@ public:
 	void addInsignificant0(size_t targetSize);
 	void removeInsignificant0();
 
+    const BigInt operator+=(const BigInt &number);
+    const BigInt operator*=(const BigInt &number);
+    const BigInt operator-=(const BigInt &number);
+    const BigInt operator/=(const BigInt &number);
+
 	const BigInt operator+(const BigInt &number);
 	const BigInt operator*(const BigInt &number);
     const BigInt operator-(const BigInt &number); //for a - b. if a < b return 0;
