@@ -168,21 +168,21 @@ digit &BigInt::operator[](size_t i)
 	return m_number[i];
 }
 
-const BigInt BigInt::operator+(const BigInt &number)
+const BigInt BigInt::operator+(const BigInt &number) const
 {
     BigInt temp;
     temp = *this;
     return temp += number;
 }
 
-const BigInt BigInt::operator*(const BigInt &number)
+const BigInt BigInt::operator*(const BigInt &number) const
 {
     BigInt temp;
     temp = *this;
     return temp *= number;
 }
 
-const BigInt BigInt::operator-(const BigInt &number)
+const BigInt BigInt::operator-(const BigInt &number) const
 {
     BigInt temp;
     temp = *this;
