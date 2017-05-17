@@ -1,14 +1,11 @@
 #include "BigInt.h"
 #include <algorithm>
-
-BigInt::BigInt()
-{
-    *this = BigInt(0);
-}
+#include <stdexcept>
 
 BigInt::BigInt(const std::vector<digit> number)
 {
-    m_number = number;
+    std::reverse_copy(number.cbegin(), number.cend(), begin());
+    removeInsignificant0();
 }
 
 BigInt::BigInt(long long number)
@@ -132,7 +129,10 @@ const BigInt BigInt::operator-=(const BigInt & number)
     BigInt tempNumber(number);
 
     if (*this <= number)
+    {
+        *this = BigInt(0);
         return BigInt(0);
+    }
 
     BigInt res = *this;
     for (size_t i = 0; i < tempNumber.GetSize(); i++)
@@ -153,10 +153,42 @@ const BigInt BigInt::operator-=(const BigInt & number)
     return res;
 }
 
-/*const BigInt BigInt::operator/=(const BigInt & number)
+const BigInt BigInt::operator/=(const BigInt & number)
 {
-    return BigInt();
-}*/
+    if (number == 0)
+    {
+        throw std::logic_error("dividing by 0");
+    }
+    if ((*this) < number)
+    {
+        *this = 0;
+        return *this;
+    }
+
+    BigInt res;
+    BigInt remaind;
+    for (int i = GetSize() - 1; i > -1; i--)
+    {
+        remaind.PushFront((*this)[i]);
+
+        res.PushFront(0);
+        while (remaind >= number)
+        {
+            remaind -= number;
+            ++res;
+        }
+    }
+
+    *this = res;
+    return res;
+}
+
+const BigInt BigInt::operator%=(const BigInt & number)
+{
+    auto divideRes = *this / number;
+    *this -= divideRes * number;
+    return *this;
+}
 
 size_t BigInt::GetSize() const
 {
@@ -172,6 +204,14 @@ void BigInt::ResizeAndFill(size_t size, digit val)
 void BigInt::Push(digit val)
 {
 	m_number.push_back(val);
+}
+
+void BigInt::PushFront(digit val)
+{
+    BigInt t = *this;
+    m_number.resize(t.GetSize() + 1);
+    m_number[0] = val;
+    std::copy(t.begin(), t.end(), begin() + 1);
 }
 
 digit BigInt::Pop()
@@ -201,6 +241,11 @@ digit &BigInt::operator[](size_t i)
 	return m_number[i];
 }
 
+const digit &BigInt::operator[](size_t i) const
+{
+    return m_number[i];
+}
+
 const BigInt BigInt::operator+(const BigInt &number) const
 {
     BigInt temp;
@@ -222,15 +267,19 @@ const BigInt BigInt::operator-(const BigInt &number) const
     return temp -= number;
 }
 
-/*const BigInt BigInt::operator/(const BigInt & number) const
+const BigInt BigInt::operator/(const BigInt & number) const
 {
-    BigInt res;
-    BigInt remainder;
-    while (remainder >= number)
-    {
-        
-    }
-}*/
+    BigInt res(*this);
+    res /= number;
+    return res;
+}
+
+const BigInt BigInt::operator%(const BigInt & number) const
+{
+    auto res = *this;
+    res %= number;
+    return res;
+}
 
 bool BigInt::operator==(const BigInt &number) const
 {

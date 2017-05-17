@@ -7,7 +7,7 @@ typedef short digit;
 class BigInt
 {
 public:
-	BigInt();
+    BigInt() = default;
 	BigInt(const std::vector<digit> number);
 	BigInt(long long number);
     BigInt(const BigInt &source);
@@ -24,12 +24,13 @@ public:
     const BigInt operator*=(const BigInt &number);
     const BigInt operator-=(const BigInt &number);
     const BigInt operator/=(const BigInt &number);
+    const BigInt operator%=(const BigInt &number);
 
 	const BigInt operator+(const BigInt &number) const;
 	const BigInt operator*(const BigInt &number) const;
-    /*if a < b it returns 0*/
     const BigInt operator-(const BigInt &number) const;
     const BigInt operator/(const BigInt &number) const;
+    const BigInt operator%(const BigInt &number) const;
 
 	bool operator==(const BigInt &number) const;
 	bool operator!=(const BigInt &number) const;
@@ -50,8 +51,10 @@ private:
     void EditOverflowDigits();
     void ResizeAndFill(size_t size, digit val);
     void Push(digit val);
+    void PushFront(digit val);
     digit Pop();
     digit &operator[](size_t i);
+    const digit &operator[](size_t i) const;
 
 	std::vector<digit> m_number;
 };
