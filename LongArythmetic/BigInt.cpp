@@ -3,7 +3,7 @@
 
 BigInt::BigInt()
 {
-
+    *this = BigInt(0);
 }
 
 BigInt::BigInt(const std::vector<digit> number)
@@ -125,6 +125,11 @@ const BigInt BigInt::operator-=(const BigInt & number)
     return res;
 }
 
+/*const BigInt BigInt::operator/=(const BigInt & number)
+{
+    return BigInt();
+}*/
+
 size_t BigInt::GetSize() const
 {
 	return m_number.size();
@@ -188,6 +193,16 @@ const BigInt BigInt::operator-(const BigInt &number) const
     temp = *this;
     return temp -= number;
 }
+
+/*const BigInt BigInt::operator/(const BigInt & number) const
+{
+    BigInt res;
+    BigInt remainder;
+    while (remainder >= number)
+    {
+        
+    }
+}*/
 
 bool BigInt::operator==(const BigInt &number) const
 {

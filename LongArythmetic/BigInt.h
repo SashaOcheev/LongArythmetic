@@ -21,7 +21,8 @@ public:
 
 	const BigInt operator+(const BigInt &number) const;
 	const BigInt operator*(const BigInt &number) const;
-    const BigInt operator-(const BigInt &number) const; //for a - b. if a < b return 0;
+    /*if a < b it returns 0*/
+    const BigInt operator-(const BigInt &number) const;
     const BigInt operator/(const BigInt &number) const;
 
 	bool operator==(const BigInt &number) const;
