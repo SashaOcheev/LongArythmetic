@@ -10,9 +10,15 @@ public:
 	BigInt();
 	BigInt(const std::vector<digit> number);
 	BigInt(long long number);
+    BigInt(const BigInt &source);
 
 	void addInsignificant0(size_t targetSize);
 	void removeInsignificant0();
+
+    const BigInt operator++();
+    const BigInt operator++(int);
+    const BigInt operator--();
+    const BigInt operator--(int);
 
     const BigInt operator+=(const BigInt &number);
     const BigInt operator*=(const BigInt &number);

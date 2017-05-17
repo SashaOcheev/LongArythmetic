@@ -20,6 +20,11 @@ BigInt::BigInt(long long number)
 	} while (number);
 }
 
+BigInt::BigInt(const BigInt & source)
+{
+    *this = source;
+}
+
 std::vector<digit>::iterator BigInt::begin()
 {
 	return m_number.begin();
@@ -57,6 +62,32 @@ void BigInt::removeInsignificant0()
 	}
 }
 
+const BigInt BigInt::operator++()
+{
+    *this += 1;
+    return *this;
+}
+
+const BigInt BigInt::operator++(int)
+{
+    BigInt res = *this;
+    ++*this;
+    return res;
+}
+
+const BigInt BigInt::operator--()
+{
+    *this -= 1;
+    return *this;
+}
+
+const BigInt BigInt::operator--(int)
+{
+    BigInt res = *this;
+    --*this;
+    return res;
+}
+
 const BigInt BigInt::operator+=(const BigInt & number)
 {
     BigInt tempNumber(number);
@@ -65,18 +96,15 @@ const BigInt BigInt::operator+=(const BigInt & number)
     addInsignificant0(maxSize);
     tempNumber.addInsignificant0(maxSize);
 
-    BigInt res;
-    for (size_t i = 0; i < tempNumber.GetSize(); i++)
-        res.Push(m_number[i] + tempNumber[i]);
+    for (size_t i = 0; i < maxSize; i++)
+        (*this)[i] = (*this)[i] + tempNumber[i];
 
     removeInsignificant0();
     tempNumber.removeInsignificant0();
 
-    res.EditOverflowDigits();
+    EditOverflowDigits();
     
-    *this = res;
-    
-    return res;
+    return *this;
 }
 
 const BigInt BigInt::operator*=(const BigInt & number)
