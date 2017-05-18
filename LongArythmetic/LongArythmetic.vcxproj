@@ -122,22 +122,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractCalculator.cpp" />
     <ClCompile Include="BigInt.cpp" />
     <ClCompile Include="BigIntTest.cpp" />
+    <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="DivisionCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MinusCommand.cpp" />
-    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="FileHandler.cpp" />
     <ClCompile Include="PlusCommand.cpp" />
     <ClCompile Include="ProductCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractCalculator.h" />
     <ClInclude Include="BigInt.h" />
     <ClInclude Include="BigIntTest.h" />
+    <ClInclude Include="Calculator.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="DivisionCommand.h" />
     <ClInclude Include="MinusCommand.h" />
-    <ClInclude Include="Parser.h" />
+    <ClInclude Include="FileHandler.h" />
     <ClInclude Include="PlusCommand.h" />
     <ClInclude Include="ProductCommand.h" />
   </ItemGroup>

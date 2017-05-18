@@ -1,7 +1,8 @@
 #include <iostream>
 #include "BigInt.h"
 #include "BigIntTest.h"
-#include "Parser.h"
+#include "FileHandler.h"
+#include <fstream>
 
 using namespace std;
 
@@ -12,6 +13,6 @@ int main(int argc, char* argv[])
     std::ifstream input(argv[1]);
     std::ofstream output(argv[2]);
 
-    Parser parser(input, output);
-    parser.Run();
+    FileHandler fileHandler(input, output);
+    fileHandler.Run();
 }
