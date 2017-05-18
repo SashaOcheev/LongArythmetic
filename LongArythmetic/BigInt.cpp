@@ -2,9 +2,10 @@
 #include <algorithm>
 #include <stdexcept>
 
-BigInt::BigInt(const std::vector<digit> number)
+BigInt::BigInt(const std::vector<digit> &number)
 {
-    std::reverse_copy(number.cbegin(), number.cend(), begin());
+    m_number = number;
+    std::reverse(m_number.begin(), m_number.end());
     removeInsignificant0();
 }
 

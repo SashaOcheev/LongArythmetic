@@ -83,7 +83,6 @@ void BigIntTest()
     assert(c == 1);
 
     c = BigInt(1232) / BigInt(10);
-    cout << c << endl;
     assert(c == 123);
     c = BigInt(1232) % BigInt(10);
     assert(c == 2);

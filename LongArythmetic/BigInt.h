@@ -8,12 +8,9 @@ class BigInt
 {
 public:
     BigInt() = default;
-	BigInt(const std::vector<digit> number);
+	BigInt(const std::vector<digit> &number);
 	BigInt(long long number);
     BigInt(const BigInt &source);
-
-	void addInsignificant0(size_t targetSize);
-	void removeInsignificant0();
 
     const BigInt operator++();
     const BigInt operator++(int);
@@ -55,6 +52,8 @@ private:
     digit Pop();
     digit &operator[](size_t i);
     const digit &operator[](size_t i) const;
+    void addInsignificant0(size_t targetSize);
+    void removeInsignificant0();
 
 	std::vector<digit> m_number;
 };

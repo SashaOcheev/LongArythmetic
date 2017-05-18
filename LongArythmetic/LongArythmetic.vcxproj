@@ -124,11 +124,22 @@
   <ItemGroup>
     <ClCompile Include="BigInt.cpp" />
     <ClCompile Include="BigIntTest.cpp" />
+    <ClCompile Include="DivisionCommand.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MinusCommand.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="PlusCommand.cpp" />
+    <ClCompile Include="ProductCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BigInt.h" />
     <ClInclude Include="BigIntTest.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="DivisionCommand.h" />
+    <ClInclude Include="MinusCommand.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="PlusCommand.h" />
+    <ClInclude Include="ProductCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
