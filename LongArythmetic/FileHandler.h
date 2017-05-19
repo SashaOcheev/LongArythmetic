@@ -2,6 +2,7 @@
 #include <fstream>
 #include "BigInt.h"
 #include "AbstractCalculator.h"
+#include <set>
 
 class FileHandler
 {
@@ -16,5 +17,6 @@ private:
     AbstractCalculator *calculator;
     std::ifstream input;
     std::ofstream output;
+    std::set<char> operators = { '-', '+', '/', '*' };
 };
 

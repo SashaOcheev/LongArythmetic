@@ -32,13 +32,13 @@ void FileHandler::Run()
                     number2.push_back(ch - '0');
                 }
             }
-            else
+            else if (operators.find(ch) != operators.end())
             {
                 op.push_back(ch);
             }
         }
         auto res = calculator->Calculate(number1, op, number2);
-        output << res << std::endl;
+        output << BigInt(number1) << " " << op << " " << BigInt(number2) << " = " << res << std::endl;
     }
 }
 
