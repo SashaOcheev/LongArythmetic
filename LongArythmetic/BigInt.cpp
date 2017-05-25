@@ -170,7 +170,14 @@ const BigInt BigInt::operator/=(const BigInt & number)
     BigInt remaind;
     for (int i = GetSize() - 1; i > -1; i--)
     {
-        remaind.PushFront((*this)[i]);
+        if (remaind == 0)
+        {
+            remaind = (*this)[i];
+        }
+        else
+        {
+            remaind.PushFront((*this)[i]);
+        }
 
         res.PushFront(0);
         while (remaind >= number)

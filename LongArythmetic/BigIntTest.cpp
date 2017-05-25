@@ -4,10 +4,32 @@
 #include <stdexcept>
 using namespace std;
 
+void DividedEndsBy0()
+{
+    BigInt a(20000);
+    BigInt b(2);
+    a /= b;
+    assert(a == 10000);
+}
+
+void DividedWith0()
+{
+    BigInt a(2000202);
+    BigInt b(2);
+    a /= b;
+    assert(a == 1000101);
+}
+
 void BigIntTest()
 {
     BigInt a(123);
     BigInt b(321);
+
+    for (BigInt i = 200; i > 0; --i)
+    {
+        BigInt a1 = 100;
+        a1 -= i;
+    }
 
     assert(a + b == 444);
     assert(b + a == 444);
@@ -124,4 +146,7 @@ void BigIntTest()
     {
         ex.what() == "dividing by zero";
     }
+
+    DividedEndsBy0();
+    DividedWith0();
 }

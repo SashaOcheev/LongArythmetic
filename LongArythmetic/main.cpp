@@ -10,9 +10,9 @@ int main(int argc, char* argv[])
 {
     BigIntTest();
 
-    std::ifstream input(argv[1]);
-    std::ofstream output(argv[2]);
+    //std::ifstream input(argv[1]);
+    //std::ofstream output(argv[2]);
 
-    FileHandler fileHandler(input, output);
-    fileHandler.Run();
+    //FileHandler fileHandler(input, output);
+    //fileHandler.Run();
 }
